@@ -63,6 +63,10 @@ public class PriorityQueue {
 		return heapArray.get(0);
 	}
 	
+	public ArrayList<Task> getAllTasks() {
+		return heapArray;
+	}
+	
 	public void deleteTopTask() {
 		if (heapArray.size() == 1) {
 			heapArray.remove(0);
@@ -152,7 +156,7 @@ public class PriorityQueue {
 	
 	public void print() {
 		for (int i = 0; i < heapArray.size(); i++) {
-			System.out.print(heapArray.get(i) + " ");
+			System.out.print(heapArray.get(i).description + " ");
 		}
 	}
 	

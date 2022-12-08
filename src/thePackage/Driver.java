@@ -1,8 +1,11 @@
 package thePackage;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -14,27 +17,45 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import thePackage.PriorityQueue.Task;
 
 public class Driver extends Application implements EventHandler {
 	private Button exit;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter("MessagesData.txt"));
-			
-			writer.write("I'll show Graham if this works!\n");
-			
+			// read in PriorityQueue data
+			BufferedReader PQReader = new BufferedReader(new FileReader("PriorityQueueData.txt"));
+			String line;
 			PriorityQueue pq = new PriorityQueue();
-			pq.add("do the thing", 3);
-			pq.add("do yet again, a thing", 1);
-			pq.add("do another thing", 5);
-			
-			for (int i = 0; i < 3; i++) {
-				writer.write(pq.getTopTaskDescription() + "\n");
-				pq.deleteTopTask();
+			while ((line = PQReader.readLine()) != null) {
+//				if (!line.isBlank() && !line.isEmpty()) {
+					String[] params = line.split(",");
+					pq.add(params[0], Integer.parseInt(params[1]));
+//				}
 			}
+			PQReader.close();
 			
-			writer.close();
+			// new PQ data
+//			pq.add("pirate swing dancing video lessons", 8);
+//			pq.add("release revolutionary new incriminating evidence", 13);
+//			pq.add("airdrop 3D printable gun models", 7);
+			
+			// write PQ data to file
+			BufferedWriter PQWriter = new BufferedWriter(new FileWriter("PriorityQueueData.txt"));
+			ArrayList<Task> tasks = pq.getAllTasks();
+			for (int i = 0; i < pq.getAllTasks().size(); i++) {
+				PQWriter.write(tasks.get(i).description + "," + tasks.get(i).priority + "\n");
+			}
+			PQWriter.close();
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 625, 500);
