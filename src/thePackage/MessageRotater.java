@@ -82,6 +82,16 @@ public class MessageRotater {
 		}
 
 	}
+	
+	public String[] getAllMessages() {
+		String[] ret = new String[numElements];
+		Node curr = head;
+		for (int i = 0; i < numElements; i++) {
+			ret[i] = curr.data;
+			curr = curr.next;
+		}
+		return ret;
+	}
 
 	public String get(String data)
 	// Returns an element e from this list such that e.equals(element);

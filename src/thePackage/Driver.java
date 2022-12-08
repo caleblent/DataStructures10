@@ -36,8 +36,16 @@ public class Driver extends Application implements EventHandler {
 			}
 			PQReader.close();
 			
-			MessageRotaterController mrc = new MessageRotaterController();
-			mrc.doTheThing();
+			// read in MessageRotater data
+			BufferedReader MRReader = new BufferedReader(new FileReader("MessagesData.txt"));
+			MessageRotater mr = new MessageRotater();
+			while ((line = MRReader.readLine()) != null) {
+				if (!line.isBlank() && !line.isEmpty()) {
+					mr.add(line);
+				}
+			}
+			PQReader.close();
+			
 			
 			// new PQ data
 //			pq.add("pirate swing dancing video lessons", 8);
@@ -45,6 +53,7 @@ public class Driver extends Application implements EventHandler {
 //			pq.add("airdrop 3D printable gun models", 7);
 //			pq.add("swap wireless mouse with exploding alarm clock", 5);
 //			pq.add("0 Day vulnerability discovered", 0);
+//			mr.add("tsk tsk IP frisked!");
 			
 			// write PQ data to file
 			BufferedWriter PQWriter = new BufferedWriter(new FileWriter("PriorityQueueData.txt"));
@@ -53,6 +62,14 @@ public class Driver extends Application implements EventHandler {
 				PQWriter.write(tasks.get(i).description + "," + tasks.get(i).priority + "\n");
 			}
 			PQWriter.close();
+			
+			// write MR data to file
+			BufferedWriter MRWriter = new BufferedWriter(new FileWriter("MessagesData.txt"));
+			String[] messages = mr.getAllMessages();
+			for (int i = 0; i < messages.length; i++) {
+				MRWriter.write(messages[i] + "\n");
+			}
+			MRWriter.close();
 			
 			
 			
