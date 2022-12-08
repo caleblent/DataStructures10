@@ -29,22 +29,27 @@ public class Driver extends Application implements EventHandler {
 			String line;
 			PriorityQueue pq = new PriorityQueue();
 			while ((line = PQReader.readLine()) != null) {
-//				if (!line.isBlank() && !line.isEmpty()) {
+				if (!line.isBlank() && !line.isEmpty()) {
 					String[] params = line.split(",");
 					pq.add(params[0], Integer.parseInt(params[1]));
-//				}
+				}
 			}
 			PQReader.close();
+			
+			MessageRotaterController mrc = new MessageRotaterController();
+			mrc.doTheThing();
 			
 			// new PQ data
 //			pq.add("pirate swing dancing video lessons", 8);
 //			pq.add("release revolutionary new incriminating evidence", 13);
 //			pq.add("airdrop 3D printable gun models", 7);
+//			pq.add("swap wireless mouse with exploding alarm clock", 5);
+//			pq.add("0 Day vulnerability discovered", 0);
 			
 			// write PQ data to file
 			BufferedWriter PQWriter = new BufferedWriter(new FileWriter("PriorityQueueData.txt"));
 			ArrayList<Task> tasks = pq.getAllTasks();
-			for (int i = 0; i < pq.getAllTasks().size(); i++) {
+			for (int i = 0; i < tasks.size(); i++) {
 				PQWriter.write(tasks.get(i).description + "," + tasks.get(i).priority + "\n");
 			}
 			PQWriter.close();
@@ -78,7 +83,7 @@ public class Driver extends Application implements EventHandler {
 			exit.setOnAction(this);
 			root.setBottom(exit);
 			
-			primaryStage.show();
+//			primaryStage.show();
 		} catch (IOException e){
 			System.out.println("IOException detected: " + e.toString());
 		} catch (Exception e) {

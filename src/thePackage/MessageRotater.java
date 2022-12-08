@@ -28,6 +28,10 @@ public class MessageRotater {
 	{
 		return numElements;
 	}
+	
+	public Node getHeadNode() {
+		return this.head;
+	}
 
 	protected void find(String target)
 	// Searches list for an occurrence of an element. If successful, sets instance
