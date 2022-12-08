@@ -25,13 +25,13 @@ public class Driver extends Application implements EventHandler{
 			root.setTop(addPane);
 			
 			PriorityQueuePanel priPan = new PriorityQueuePanel();
-			addPane.getTabs().add(new Tab("Priority", priPan));
+			addPane.getTabs().add(new Tab("Hacking Tasks", priPan));
 			
 			MessagePanel mesPan = new MessagePanel();
-			addPane.getTabs().add(new Tab("Message", mesPan));
+			addPane.getTabs().add(new Tab("DDoS Hitlist", mesPan));
 			
 			AnimalPanel malPan = new AnimalPanel();
-			addPane.getTabs().add(new Tab("Animal", malPan));
+			addPane.getTabs().add(new Tab("Animal Savagery", malPan));
 			
 			exit = new Button("Exit");
 			exit.setOnAction(this);

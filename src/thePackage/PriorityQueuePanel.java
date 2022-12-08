@@ -34,7 +34,7 @@ public class PriorityQueuePanel extends VBox implements EventHandler{
 		HBox temp = new HBox();
 		temp.setSpacing(7);
 		
-		Label taskL = new Label("Add Task:");
+		Label taskL = new Label("Add Another Hacking Task:");
 		task = new TextField();
 		temp.getChildren().add(taskL);
 		temp.getChildren().add(task);
@@ -42,13 +42,13 @@ public class PriorityQueuePanel extends VBox implements EventHandler{
 		
 		temp = new HBox();
 		temp.setSpacing(7);
-		Label priorL = new Label("Priority(1-100):");
+		Label priorL = new Label("Priority of this expoit (1-100):");
 		priority = new TextField();
 		temp.getChildren().add(priorL);
 		temp.getChildren().add(priority);
 		getChildren().add(temp);
 		
-		addTask = new Button("Add Task");
+		addTask = new Button("Add New Hack!");
 		addTask.setOnAction(this);
 		getChildren().add(addTask);
 	}

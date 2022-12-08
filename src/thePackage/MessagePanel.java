@@ -19,19 +19,19 @@ public class MessagePanel extends VBox implements EventHandler{
 		HBox temp = new HBox();
 		temp.setSpacing(6);
 		
-		Label curMes = new Label("Current Message:");
+		Label curMes = new Label("Current I.P. :");
 		cur = new TextField();
 		cur.setEditable(false);
-		delCur = new Button("Delete Message");
+		delCur = new Button("DDoS this I.P.");
 		delCur.setOnAction(this);
 		temp.getChildren().addAll(curMes, cur, delCur);
 		getChildren().add(temp);
 		
 		temp = new HBox();
 		temp.setSpacing(6);
-		Label newMes = new Label("New Message:");
+		Label newMes = new Label("Add new I.P. to hit list:");
 		futureMes = new TextField();
-		addMes = new Button("Add Message");
+		addMes = new Button("Add I.P.");
 		addMes.setOnAction(this);
 		temp.getChildren().addAll(newMes, futureMes, addMes);
 		getChildren().add(temp);
