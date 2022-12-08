@@ -1,5 +1,9 @@
 package thePackage;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.Event;
@@ -11,11 +15,16 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class Driver extends Application implements EventHandler{
+public class Driver extends Application implements EventHandler {
 	private Button exit;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter("MessagesData.txt"));
+			
+			writer.write("I'll show Graham if this works!");
+			writer.close();
+			
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 625, 500);
 			primaryStage.setScene(scene);
@@ -38,9 +47,14 @@ public class Driver extends Application implements EventHandler{
 			root.setBottom(exit);
 			
 			primaryStage.show();
-		}catch(Exception e) {
+		} catch (IOException e){
+			System.out.println("IOException detected: " + e.toString());
+		} catch (Exception e) {
+			System.out.println("Some exception occurred: " + e.toString());
+			System.out.println("----------------------------------------------------");
 			e.printStackTrace();
 		}
+		
 	}
 	public static void main(String[] args) {
 		launch(args);

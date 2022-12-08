@@ -11,10 +11,15 @@ public class PriorityQueue {
 	// Children to find parent: (k-1)/2
 	// Requirements: Each step needs to be filled except last step
 	// Parent needs to be greater/less than the children
-	private ArrayList<Task> heapArray = new ArrayList<>();
+	private ArrayList<Task> heapArray;
+	
+	private int size;
 
 	// constructor
-	public PriorityQueue() {}
+	public PriorityQueue() {
+		heapArray = new ArrayList<>();
+		size = 0;
+	}
 
 	/**
 	 * Take a Task object and adds it to the heapArray
@@ -22,6 +27,7 @@ public class PriorityQueue {
 	 * @param item
 	 */
 	private void add(Task item) {
+		size++;
 		heapArray.add(item);
 		swim(heapArray.size() - 1);
 	}
@@ -52,6 +58,14 @@ public class PriorityQueue {
 	public Task getTopTask() {
 		return heapArray.get(0);
 	}
+	
+	public Task deleteTopTask() {
+        Task popped = heapArray.get(0);
+        heapArray.add(0, heapArray.get(size--));
+        sink(0);
+ 
+        return popped;
+    }
 
 	public Task takeRoot() {
 		if (heapArray.size() == 0) {

@@ -196,7 +196,7 @@ public class MessageRotater {
 
 	}
 
-	public String printReverse()
+	public String toStringReverse()
 	// prints the elements of the list in a nicely formated manner in reverse order
 	{
 
