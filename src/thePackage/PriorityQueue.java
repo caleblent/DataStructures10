@@ -42,6 +42,16 @@ public class PriorityQueue {
 			add(item);
 		}
 	}
+	
+	public String getTopTaskDescription() {
+		return heapArray.get(0).description;
+	}
+	public int getTopTaskPriority() {
+		return heapArray.get(0).priority;
+	}
+	public Task getTopTask() {
+		return heapArray.get(0);
+	}
 
 	public Task takeRoot() {
 		if (heapArray.size() == 0) {
