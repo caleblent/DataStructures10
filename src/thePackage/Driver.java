@@ -22,7 +22,18 @@ public class Driver extends Application implements EventHandler {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("MessagesData.txt"));
 			
-			writer.write("I'll show Graham if this works!");
+			writer.write("I'll show Graham if this works!\n");
+			
+			PriorityQueue pq = new PriorityQueue();
+			pq.add("do the thing", 3);
+			pq.add("do yet again, a thing", 1);
+			pq.add("do another thing", 5);
+			
+			for (int i = 0; i < 3; i++) {
+				writer.write(pq.getTopTaskDescription() + "\n");
+				pq.deleteTopTask();
+			}
+			
 			writer.close();
 			
 			BorderPane root = new BorderPane();

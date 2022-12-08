@@ -13,13 +13,17 @@ public class PriorityQueue {
 	// Parent needs to be greater/less than the children
 	private ArrayList<Task> heapArray;
 	
-	private int size;
+//	private int size;
 
 	// constructor
 	public PriorityQueue() {
 		heapArray = new ArrayList<>();
-		size = 0;
+//		size = 0;
 	}
+	
+//	public int getSize() {
+//		return this.size;
+//	}
 
 	/**
 	 * Take a Task object and adds it to the heapArray
@@ -27,7 +31,7 @@ public class PriorityQueue {
 	 * @param item
 	 */
 	private void add(Task item) {
-		size++;
+//		size++;
 		heapArray.add(item);
 		swim(heapArray.size() - 1);
 	}
@@ -59,12 +63,16 @@ public class PriorityQueue {
 		return heapArray.get(0);
 	}
 	
-	public Task deleteTopTask() {
-        Task popped = heapArray.get(0);
-        heapArray.add(0, heapArray.get(size--));
-        sink(0);
- 
-        return popped;
+	public void deleteTopTask() {
+		if (heapArray.size() == 1) {
+			heapArray.remove(0);
+		} else {
+			heapArray.remove(0);
+	        heapArray.add(0, heapArray.get(heapArray.size()-1));
+	        heapArray.remove(heapArray.size()-1);
+	        sink(0);
+		}
+        
     }
 
 	public Task takeRoot() {
