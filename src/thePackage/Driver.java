@@ -51,6 +51,10 @@ public class Driver extends Application implements EventHandler {
 			}
 			PQReader.close();
 			
+			// add AnimalGame data
+			
+			
+			
 			// open up the GUI window
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 625, 500);
