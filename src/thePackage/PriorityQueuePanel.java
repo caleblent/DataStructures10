@@ -42,9 +42,9 @@ public class PriorityQueuePanel extends VBox implements EventHandler{
 		this.pq = priorityQueue;
 		
 		displayedMessage = new TextArea();
-		displayedMessage.setPrefSize(625,325);
+		displayedMessage.setPrefSize(325,325);
 		displayedMessage.setEditable(false);
-		displayedMessage.setWrapText(true);
+		displayedMessage.setText(pq.getTopTaskDescription());
 		getChildren().add(displayedMessage);
 		
 		BorderPane d = new BorderPane();

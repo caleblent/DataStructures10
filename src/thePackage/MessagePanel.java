@@ -98,7 +98,7 @@ public class MessagePanel extends VBox implements EventHandler{
 		CursorSwap cursorSwap = new CursorSwap();
 		timer = new Timer();
 		// 1ms delay (to account for asynchronous tasks), then 3s fixed looping interval
-		timer.schedule(cursorSwap, 1, 3000); 
+		timer.schedule(cursorSwap, 50, 3000); 
 	}
 	
 	public void cancelTimer() {
