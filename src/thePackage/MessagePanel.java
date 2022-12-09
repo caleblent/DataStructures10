@@ -49,10 +49,10 @@ public class MessagePanel extends VBox implements EventHandler{
 		HBox temp = new HBox();
 		temp.setSpacing(6);
 		
-		Label currMessage = new Label("Current I.P.:");
+		Label currMessage = new Label("Current I.P.");
 		currMessageTF = new TextField();
 		currMessageTF.setEditable(false);
-		deleteCurrentMessageButton = new Button("DDos this I.P.");
+		deleteCurrentMessageButton = new Button("DDoS this I.P.");
 		deleteCurrentMessageButton.setOnAction(this);
 		temp.getChildren().addAll(currMessage, currMessageTF, deleteCurrentMessageButton);
 		getChildren().add(temp);
@@ -79,14 +79,16 @@ public class MessagePanel extends VBox implements EventHandler{
 	private void setCurrentMessage(String message) {
 		if (message == null || message.isBlank() || message.isEmpty())
 			return;
-		currMessageTF.setText(message);
+		else
+			currMessageTF.setText(message);
 	}
 
 	@Override
 	public void handle(Event e) {
 		if (e.getSource() == deleteCurrentMessageButton) {
-			cursor = cursor.next;
-			mr.remove(cursor.prev);
+			Node temp = cursor;
+			mr.remove(cursor);
+			cursor = temp.next;
 		} if (e.getSource() == addMessageButton) {
 			String newMessage = newMessageTF.getText();
 			mr.add(newMessage);
