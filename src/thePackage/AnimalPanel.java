@@ -8,7 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import thePackage.AnimalController.UserInputType;
 
-public class AnimalPanel extends VBox implements EventHandler{
+public class AnimalPanel extends VBox implements EventHandler {
 	
 //	AnimalGame aGame;
 	AnimalController aController;
@@ -67,17 +67,22 @@ public class AnimalPanel extends VBox implements EventHandler{
 		submitButton.setOnAction(this);
 		getChildren().add(submitButton);
 	}
-	public void clearUserResponse() {
-		userAnimalTF.setText("");
+	public void clearUserResponses() {
+		userAnimalTF.clear();
+		userQuestionTF.setText("");
 	}
-	public void setPromptMessage(String mes) {
+	public void setPrompt1(String mes) {
 		prompt1TF.setText(mes);
 	}
-	public void setGameResponse(String mes) {
+	public void setPrompt2(String mes) {
 		prompt2TF.setText(mes);
 	}
-	public void setUserResponse(String mes) {
-		userAnimalTF.setText(mes);
+	public void setPrompt3(String mes) {
+		prompt3TF.setText(mes);
+	}
+	public void clearPrompts2and3() {
+		prompt2TF.clear();
+		prompt3TF.clear();
 	}
 	public void setCurrentNode(AnimalNode curr) {
 		this.currentAnimalNode = curr;
@@ -98,9 +103,16 @@ public class AnimalPanel extends VBox implements EventHandler{
 				aController.handleNextPrompt(currentAnimalNode, UserInputType.NOFINAL, null);
 			}
 		} else if (e.getSource() == submitButton) {
-			aController.handleNextPrompt(currentAnimalNode, UserInputType.SUBMIT,
-				new String[] {userAnimalTF.getText(), userAnimalTF.getText()}
-			);
+			String animal = userAnimalTF.getText();
+			String question = userAnimalTF.getText();
+			if (animal == null || animal.isBlank() || animal.isEmpty() || 
+				question == null || question.isBlank() || question.isEmpty()) {
+				prompt1TF.setText("Must have valid entries for both inputs");
+			} else {
+				aController.handleNextPrompt(currentAnimalNode, UserInputType.SUBMIT,
+					new String[] {animal, question}
+				);
+			}
 		}
 	}
 }

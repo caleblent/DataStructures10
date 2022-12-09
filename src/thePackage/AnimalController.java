@@ -21,8 +21,8 @@ public class AnimalController {
 	}
 	
 	public void startGame() {
-		aPanel.clearUserResponse();
-		aPanel.setGameResponse("Think of an animal. Let's see if I can guess it!");
+		aPanel.clearUserResponses();
+		aPanel.setPrompt3("Think of an animal. Let's see if I can guess it!");
 		aPanel.setCurrentNode(rootNode);
 	}
 	
@@ -30,25 +30,28 @@ public class AnimalController {
 		if (userInputType == UserInputType.YES) {
 			
 			node = node.getLeft();
-			aPanel.setPromptMessage(node.getData() + " (Y/N)");
+			aPanel.setPrompt1(node.getData() + " (Y/N)");
+			aPanel.clearPrompts2and3();
+			
 			
 		} else if (userInputType == UserInputType.NO) {
 			
 			node = node.getRight();
-			aPanel.setPromptMessage(node.getData() + " (Y/N)");
+			aPanel.setPrompt1(node.getData() + " (Y/N)");
+			aPanel.clearPrompts2and3();
 			
 		} else if (userInputType == UserInputType.YESFINAL) {
 			
-			aPanel.setGameResponse("Hurray! I got it. Let's play again...");
+			aPanel.setPrompt2("Hurray! I got it. Let's play again...");
 			startGame();
 			
 		} else if (userInputType == UserInputType.NOFINAL) {
 			
-			aPanel.setGameResponse("Darn! What was it?");
+			aPanel.setPrompt2("Darn! What animal was it?");
 			if (coin) {
-				aPanel.setGameResponse("What is a YES for that but a NO for " + node.getData() + "?");
+				aPanel.setPrompt3("What is a YES for that but a NO for " + node.getData() + "?");
 			} else {
-				aPanel.setGameResponse("What is a NO for that but a YES for " + node.getData() + "?");
+				aPanel.setPrompt3("What is a NO for that but a YES for " + node.getData() + "?");
 			}
 			
 		} else if (userInputType == UserInputType.SUBMIT) {
@@ -59,13 +62,9 @@ public class AnimalController {
 				node.insertLeft(inputs[0], inputs[1]);
 			}
 			coin = !coin;
+			aPanel.setPrompt2("Let's try again!");
 			startGame();
 		}
-	}
-	
-	private String getUserInput() {
-		
-		return null;
 	}
 
 	/**
