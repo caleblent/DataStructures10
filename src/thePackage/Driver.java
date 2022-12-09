@@ -42,6 +42,7 @@ public class Driver extends Application implements EventHandler {
 			// read in MessageRotater data
 			BufferedReader MRReader = new BufferedReader(new FileReader("MessagesData.txt"));
 			mr = new MessageRotater();
+			mr.add("SENTINEL");
 			while ((line = MRReader.readLine()) != null) {
 				if (!line.isBlank() && !line.isEmpty()) {
 					mr.add(line);
@@ -74,10 +75,8 @@ public class Driver extends Application implements EventHandler {
 			
 			primaryStage.show();
 		} catch (IOException eRead){
-			System.out.println("IOException detected: " + eRead.toString());
+			eRead.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("Some exception occurred: " + e.toString());
-			System.out.println("----------------------------------------------------");
 			e.printStackTrace();
 		}
 		
@@ -100,7 +99,8 @@ public class Driver extends Application implements EventHandler {
 				// write MR data to file
 				BufferedWriter MRWriter = new BufferedWriter(new FileWriter("MessagesData.txt"));
 				String[] messages = mr.getAllMessages();
-				for (int i = 0; i < messages.length; i++) {
+				// start at i = 1 to skip the SENTINEL node
+				for (int i = 1; i < messages.length; i++) {
 					MRWriter.write(messages[i] + "\n");
 				}
 				MRWriter.close();
@@ -109,6 +109,7 @@ public class Driver extends Application implements EventHandler {
 			}
 			
 			Platform.exit();
+			System.exit(0);
 		}
 	}
 }

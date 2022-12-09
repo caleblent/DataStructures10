@@ -58,6 +58,7 @@ public class PriorityQueuePanel extends VBox implements EventHandler{
 		
 		Label taskL = new Label("Add Hacking Task:");
 		descriptionTF = new TextField();
+		descriptionTF.setMinWidth(300);
 		temp.getChildren().add(taskL);
 		temp.getChildren().add(descriptionTF);
 		getChildren().add(temp);
@@ -66,6 +67,7 @@ public class PriorityQueuePanel extends VBox implements EventHandler{
 		temp.setSpacing(7);
 		Label priorL = new Label("Priority (1-100):");
 		priorityTF = new TextField();
+		priorityTF.setMinWidth(100);
 		temp.getChildren().add(priorL);
 		temp.getChildren().add(priorityTF);
 		getChildren().add(temp);
@@ -97,8 +99,19 @@ public class PriorityQueuePanel extends VBox implements EventHandler{
 		} if (e.getSource() == addTaskButton) {
 			String description = descriptionTF.getText();
 			String priority = priorityTF.getText();
-			pq.add(description, Integer.parseInt(priority));
-			setDisplay(pq.getTopTaskDescription());
+			try {
+				int priorityInt = Integer.parseInt(priority);
+				if (priorityInt < 1 || priorityInt > 100)
+					throw new IllegalArgumentException("priority can only be 1-100");
+				pq.add(description, priorityInt);
+				setDisplay(pq.getTopTaskDescription());
+			} catch (NumberFormatException eNum) {
+				setDisplay(pq.getTopTaskDescription() + "\n\n" +
+				"PRIORITY MUST BE A VALID INTEGER");
+			} catch (IllegalArgumentException eIll) {
+				setDisplay(pq.getTopTaskDescription() + "\n\n" +
+				"PRIORITY MUST BE AN INTEGER BETWEEN 1 AND 100 (inclusive)");
+			}
 			clear();
 		}
 	}

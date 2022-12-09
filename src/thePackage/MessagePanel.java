@@ -23,6 +23,7 @@ public class MessagePanel extends VBox implements EventHandler{
 	 */
 	private Node cursor;
 	private Timer timer;
+	private Node sentinel;
 	/**
 	 * current messege TextField attribute
 	 */
@@ -100,7 +101,7 @@ public class MessagePanel extends VBox implements EventHandler{
 		CursorSwap cursorSwap = new CursorSwap();
 		timer = new Timer();
 		// 1ms delay (to account for asynchronous tasks), then 3s fixed looping interval
-		timer.schedule(cursorSwap, 50, 3000); 
+		timer.schedule(cursorSwap, 50, 2000); 
 	}
 	
 	public void cancelTimer() {
@@ -112,7 +113,18 @@ public class MessagePanel extends VBox implements EventHandler{
 		@Override
 		public void run() {
 			cursor = cursor.next;
-			setCurrentMessage(cursor.data);
+			// if cursor is SENTINEL, go to next node in list
+			if (cursor.data.equalsIgnoreCase("SENTINEL")) {
+				cursor = cursor.next;
+				// if cursor is SENTINEL and next is also SENTINEL, then the MR object is empty
+				if (cursor.data.equalsIgnoreCase("SENTINEL")) {
+					setCurrentMessage("*No more valid I.P.'s to DDoS*");
+				} else {
+					setCurrentMessage(cursor.data);
+				}
+			} else {
+				setCurrentMessage(cursor.data);
+			}
 		}
 	}
 }
