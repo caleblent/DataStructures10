@@ -3,6 +3,7 @@ package thePackage;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -42,19 +43,22 @@ public class PriorityQueuePanel extends VBox implements EventHandler{
 		this.pq = priorityQueue;
 		
 		displayedMessage = new TextArea();
-		displayedMessage.setPrefSize(325,325);
+		displayedMessage.setPrefSize(325,150);
 		displayedMessage.setEditable(false);
 		displayedMessage.setText(pq.getTopTaskDescription());
+		displayedMessage.setPadding(new Insets(10, 10, 0, 10));
 		getChildren().add(displayedMessage);
 		
 		BorderPane d = new BorderPane();
 		deleteButton = new Button("Complete Task");
 		deleteButton.setOnAction(this);
+		d.setPadding(new Insets(5, 5, 5, 5));
 		d.setRight(deleteButton);
 		getChildren().add(d);
 		
 		HBox temp = new HBox();
-		temp.setSpacing(7);
+		temp.setSpacing(6);
+		temp.setPadding(new Insets(5, 10, 5, 10));
 		
 		Label taskL = new Label("Add Hacking Task:");
 		descriptionTF = new TextField();
@@ -64,7 +68,8 @@ public class PriorityQueuePanel extends VBox implements EventHandler{
 		getChildren().add(temp);
 		
 		temp = new HBox();
-		temp.setSpacing(7);
+		temp.setSpacing(6);
+		temp.setPadding(new Insets(5, 10, 5, 10));
 		Label priorL = new Label("Priority (1-100):");
 		priorityTF = new TextField();
 		priorityTF.setMinWidth(100);
@@ -72,9 +77,12 @@ public class PriorityQueuePanel extends VBox implements EventHandler{
 		temp.getChildren().add(priorityTF);
 		getChildren().add(temp);
 		
+		temp = new HBox();
+		temp.setPadding(new Insets(5, 5, 5, 10));
 		addTaskButton = new Button("Add Task");
 		addTaskButton.setOnAction(this);
-		getChildren().add(addTaskButton);
+		temp.getChildren().add(addTaskButton);
+		getChildren().add(temp);
 	}
 	/**
 	 * clears necessary TextFields

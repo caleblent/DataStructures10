@@ -6,9 +6,12 @@ import java.util.TimerTask;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import thePackage.MessageRotater.Node;
@@ -23,7 +26,6 @@ public class MessagePanel extends VBox implements EventHandler{
 	 */
 	private Node cursor;
 	private Timer timer;
-	private Node sentinel;
 	/**
 	 * current messege TextField attribute
 	 */
@@ -46,13 +48,14 @@ public class MessagePanel extends VBox implements EventHandler{
 		cursor = mr.getHeadNode();
 		initializeCursorIteration();
 		
-		this.setSpacing(20);
 		HBox temp = new HBox();
 		temp.setSpacing(6);
+		temp.setPadding(new Insets(15, 0, 0, 10));
 		
-		Label currMessage = new Label("Current I.P.");
+		Label currMessage = new Label("Current I.P. ");
 		currMessageTF = new TextField();
 		currMessageTF.setEditable(false);
+		currMessageTF.setMinWidth(300);
 		deleteCurrentMessageButton = new Button("DDoS this I.P.");
 		deleteCurrentMessageButton.setOnAction(this);
 		temp.getChildren().addAll(currMessage, currMessageTF, deleteCurrentMessageButton);
@@ -62,8 +65,10 @@ public class MessagePanel extends VBox implements EventHandler{
 		temp.setSpacing(6);
 		Label newMessage = new Label("Add new I.P. to hitlist:");
 		newMessageTF = new TextField();
+		newMessageTF.setMinWidth(300);
 		addMessageButton = new Button("Add I.P.");
 		addMessageButton.setOnAction(this);
+		temp.setPadding(new Insets(20, 0, 0, 10));
 		temp.getChildren().addAll(newMessage, newMessageTF, addMessageButton);
 		getChildren().add(temp);
 	}

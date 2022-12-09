@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -50,12 +51,13 @@ public class Driver extends Application implements EventHandler {
 			}
 			PQReader.close();
 			
-			
 			// open up the GUI window
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 625, 500);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Hacking Animals");
+			primaryStage.setMinHeight(500);
+			primaryStage.setMinWidth(625);
 			
 			TabPane addPane = new TabPane();
 			root.setTop(addPane);
@@ -71,6 +73,7 @@ public class Driver extends Application implements EventHandler {
 			
 			exitButton = new Button("Exit");
 			exitButton.setOnAction(this);
+			root.setPadding(new Insets(5, 5, 5, 5));
 			root.setBottom(exitButton);
 			
 			primaryStage.show();
