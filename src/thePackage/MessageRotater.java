@@ -169,31 +169,7 @@ public class MessageRotater {
 	// Removes an element e from this list such that e.equals(element)
 	// and returns true; if no such element exists, returns false.
 	{
-		if (location == head && size() == 1) // removes the only existing element
-												// empties the list
-		{
-			head = null;
-			tail = null;
-
-		} else if (location == head) // removes first node
-		{
-			head = head.next;
-			head.prev = tail;
-			tail.next = head;
-
-		} else if (location == tail) // removes last node
-		{
-
-			tail = tail.prev;
-			tail.next = head;
-			head.prev = tail;
-		} else { // removes node at location
-			location.prev.next = location.next;
-			location.next.prev = location.prev;
-		}
-		numElements--;
-		
-		return found;
+		return remove(element.data);
 	}
 
 	public void removeAtPosition(int position)

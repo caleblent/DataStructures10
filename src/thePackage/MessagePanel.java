@@ -22,6 +22,7 @@ public class MessagePanel extends VBox implements EventHandler{
 	 * used for rotating through the messages
 	 */
 	private Node cursor;
+	private Timer timer;
 	/**
 	 * current messege TextField attribute
 	 */
@@ -73,10 +74,12 @@ public class MessagePanel extends VBox implements EventHandler{
 	}
 	/**
 	 * Changes the currently displayed message
-	 * @param mes
+	 * @param message
 	 */
-	private void setCurrentMessage(String mes) {
-		currMessageTF.setText(mes);
+	private void setCurrentMessage(String message) {
+		if (message == null || message.isBlank() || message.isEmpty())
+			return;
+		currMessageTF.setText(message);
 	}
 
 	@Override
@@ -93,15 +96,19 @@ public class MessagePanel extends VBox implements EventHandler{
 	
 	public void initializeCursorIteration() {
 		CursorSwap cursorSwap = new CursorSwap();
-		Timer timer = new Timer();
-		timer.schedule(cursorSwap, 1000, 3000); // 1s delay, then 3s fixed looping interval
+		timer = new Timer();
+		// 1ms delay (to account for asynchronous tasks), then 3s fixed looping interval
+		timer.schedule(cursorSwap, 1, 3000); 
+	}
+	
+	public void cancelTimer() {
+		timer.cancel();
 	}
 	
 	// used for the timer on the cursor
 	public class CursorSwap extends TimerTask {
 		@Override
 		public void run() {
-			System.out.println("swap cursor to next...");
 			cursor = cursor.next;
 			setCurrentMessage(cursor.data);
 		}

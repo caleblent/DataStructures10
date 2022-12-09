@@ -20,14 +20,17 @@ import javafx.stage.Stage;
 import thePackage.PriorityQueue.Task;
 
 public class Driver extends Application implements EventHandler {
-	private Button exit;
+	private Button exitButton;
+	private PriorityQueue pq;
+	private MessageRotater mr;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			// read in PriorityQueue data
 			BufferedReader PQReader = new BufferedReader(new FileReader("PriorityQueueData.txt"));
 			String line;
-			PriorityQueue pq = new PriorityQueue();
+			pq = new PriorityQueue();
 			while ((line = PQReader.readLine()) != null) {
 				if (!line.isBlank() && !line.isEmpty()) {
 					String[] params = line.split(",");
@@ -38,7 +41,7 @@ public class Driver extends Application implements EventHandler {
 			
 			// read in MessageRotater data
 			BufferedReader MRReader = new BufferedReader(new FileReader("MessagesData.txt"));
-			MessageRotater mr = new MessageRotater();
+			mr = new MessageRotater();
 			while ((line = MRReader.readLine()) != null) {
 				if (!line.isBlank() && !line.isEmpty()) {
 					mr.add(line);
@@ -47,38 +50,7 @@ public class Driver extends Application implements EventHandler {
 			PQReader.close();
 			
 			
-			// new PQ data
-//			pq.add("pirate swing dancing video lessons", 8);
-//			pq.add("release revolutionary new incriminating evidence", 13);
-//			pq.add("airdrop 3D printable gun models", 7);
-//			pq.add("swap wireless mouse with exploding alarm clock", 5);
-//			pq.add("0 Day vulnerability discovered", 0);
-//			mr.add("tsk tsk IP frisked!");
-			
-			// write PQ data to file
-			BufferedWriter PQWriter = new BufferedWriter(new FileWriter("PriorityQueueData.txt"));
-			ArrayList<Task> tasks = pq.getAllTasks();
-			for (int i = 0; i < tasks.size(); i++) {
-				PQWriter.write(tasks.get(i).description + "," + tasks.get(i).priority + "\n");
-			}
-			PQWriter.close();
-			
-			// write MR data to file
-			BufferedWriter MRWriter = new BufferedWriter(new FileWriter("MessagesData.txt"));
-			String[] messages = mr.getAllMessages();
-			for (int i = 0; i < messages.length; i++) {
-				MRWriter.write(messages[i] + "\n");
-			}
-			MRWriter.close();
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			// open up the GUI window
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 625, 500);
 			primaryStage.setScene(scene);
@@ -96,13 +68,13 @@ public class Driver extends Application implements EventHandler {
 			AnimalPanel malPan = new AnimalPanel();
 			addPane.getTabs().add(new Tab("Animal Savagery", malPan));
 			
-			exit = new Button("Exit");
-			exit.setOnAction(this);
-			root.setBottom(exit);
+			exitButton = new Button("Exit");
+			exitButton.setOnAction(this);
+			root.setBottom(exitButton);
 			
 			primaryStage.show();
-		} catch (IOException e){
-			System.out.println("IOException detected: " + e.toString());
+		} catch (IOException eRead){
+			System.out.println("IOException detected: " + eRead.toString());
 		} catch (Exception e) {
 			System.out.println("Some exception occurred: " + e.toString());
 			System.out.println("----------------------------------------------------");
@@ -115,7 +87,27 @@ public class Driver extends Application implements EventHandler {
 	}
 	@Override
 	public void handle(Event e) {
-		if (e.getSource() == exit) {
+		if (e.getSource() == exitButton) {
+			try {
+				// write PQ data to file
+				BufferedWriter PQWriter = new BufferedWriter(new FileWriter("PriorityQueueData.txt"));
+				ArrayList<Task> tasks = pq.getAllTasks();
+				for (int i = 0; i < tasks.size(); i++) {
+					PQWriter.write(tasks.get(i).description + "," + tasks.get(i).priority + "\n");
+				}
+				PQWriter.close();
+				
+				// write MR data to file
+				BufferedWriter MRWriter = new BufferedWriter(new FileWriter("MessagesData.txt"));
+				String[] messages = mr.getAllMessages();
+				for (int i = 0; i < messages.length; i++) {
+					MRWriter.write(messages[i] + "\n");
+				}
+				MRWriter.close();
+			} catch (IOException eWrite) {
+				eWrite.printStackTrace();
+			}
+			
 			Platform.exit();
 		}
 	}
