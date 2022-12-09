@@ -38,11 +38,6 @@ public class PriorityQueuePanel extends VBox implements EventHandler{
 	 */
 	private Button addTaskButton;
 	
-	/**
-	 * PriorityQueueController is the intermediary that communicates with the GUI and the model PriorityQueue
-	 */
-//	PriorityQueueController pqc = new PriorityQueueController();
-	
 	public PriorityQueuePanel(PriorityQueue priorityQueue) {
 		this.pq = priorityQueue;
 		

@@ -90,7 +90,7 @@ public class Driver extends Application implements EventHandler {
 			PriorityQueuePanel priPan = new PriorityQueuePanel(pq);
 			addPane.getTabs().add(new Tab("Hacking Tasks", priPan));
 			
-			MessagePanel mesPan = new MessagePanel();
+			MessagePanel mesPan = new MessagePanel(mr);
 			addPane.getTabs().add(new Tab("DDoS Hitlist", mesPan));
 			
 			AnimalPanel malPan = new AnimalPanel();
