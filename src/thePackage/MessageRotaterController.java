@@ -7,15 +7,13 @@ import thePackage.MessageRotater.Node;
 public class MessageRotaterController {
 	MessageRotater mr = new MessageRotater();
 	private Node cursor = mr.getHeadNode();
+	
 	public String updateCur() {
-		String ret = mr.get(cursor.data);
-		return ret;
+		return mr.get(cursor.data);
 	}
-	public String deleteCur(String cur) {
-		cur = cursor.data;
-		mr.remove(cur);
-		String ret = updateCur();
-		return ret;
+	public String deleteCur() {
+		mr.remove(cursor);
+		return updateCur();
 	}
 	public String addMes(String mes) {
 		mr.add(mes);
@@ -33,6 +31,7 @@ public class MessageRotaterController {
 		public void run() {
 			System.out.println("swap cursor to next...");
 			cursor = cursor.next;
+			updateCur();
 		}
 	}
 

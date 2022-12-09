@@ -100,7 +100,7 @@ public class Driver extends Application implements EventHandler {
 			exit.setOnAction(this);
 			root.setBottom(exit);
 			
-//			primaryStage.show();
+			primaryStage.show();
 		} catch (IOException e){
 			System.out.println("IOException detected: " + e.toString());
 		} catch (Exception e) {

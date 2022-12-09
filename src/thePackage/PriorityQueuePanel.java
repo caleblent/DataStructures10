@@ -1,5 +1,6 @@
 package thePackage;
 
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -12,14 +13,31 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class PriorityQueuePanel extends VBox implements EventHandler{
+	/**
+	 * Currently displayed message TextField attribute
+	 */
 	private TextArea dis;
+	/**
+	 * Button to delete currently displayed message attribute
+	 */
 	private Button delete;
-	private TextField task;
-	private TextField priority;
-	private Button addTask;
+	/**
+	 * Message to add TextField attribute
+	 */
+	private TextField descriptionTF;
+	/**
+	 * The priority of message to add TextField attribute
+	 */
+	private TextField priorityTF;
+	/**
+	 * Button to add a task attribute
+	 */
+	private Button addTaskButton;
+	
+	PriorityQueueController pqc = new PriorityQueueController();
 	
 	public PriorityQueuePanel() {
-		dis = new TextArea("Stuff");
+		dis = new TextArea();
 		dis.setPrefSize(625,325);
 		dis.setEditable(false);
 		dis.setWrapText(true);
@@ -34,41 +52,47 @@ public class PriorityQueuePanel extends VBox implements EventHandler{
 		HBox temp = new HBox();
 		temp.setSpacing(7);
 		
-		Label taskL = new Label("Add Another Hacking Task:");
-		task = new TextField();
+		Label taskL = new Label("Add Hacking Task:");
+		descriptionTF = new TextField();
 		temp.getChildren().add(taskL);
-		temp.getChildren().add(task);
+		temp.getChildren().add(descriptionTF);
 		getChildren().add(temp);
 		
 		temp = new HBox();
 		temp.setSpacing(7);
-		Label priorL = new Label("Priority of this expoit (1-100):");
-		priority = new TextField();
+		Label priorL = new Label("Priority(1-100):");
+		priorityTF = new TextField();
 		temp.getChildren().add(priorL);
-		temp.getChildren().add(priority);
+		temp.getChildren().add(priorityTF);
 		getChildren().add(temp);
 		
-		addTask = new Button("Add New Hack!");
-		addTask.setOnAction(this);
-		getChildren().add(addTask);
+		addTaskButton = new Button("Add Task");
+		addTaskButton.setOnAction(this);
+		getChildren().add(addTaskButton);
 	}
+	/**
+	 * clears necessary TextFields
+	 */
 	private void clear() {
-		task.setText("");
-		priority.setText("");
+		descriptionTF.setText("");
+		priorityTF.setText("");
 	}
+	/**
+	 * changes the currently displayed message
+	 * @param mes
+	 */
 	private void changeDis(String mes) {
 		dis.setText(mes);
 	}
 	
-	
 	@Override
 	public void handle(Event e) {
 		if (e.getSource() == delete) {
-		//	changeDis(calebDeleteMethod());
-		}if (e.getSource() == addTask) {
-			Object t = task.getUserData();
-			Object p = priority.getUserData();
-		//  changeDis(calebAddMethod(t,p));
+			changeDis(pqc.deleteCurTask());
+		}if (e.getSource() == addTaskButton) {
+			String description = descriptionTF.getText();
+			String priority = priorityTF.getText();
+			changeDis(pqc.addTask(description, Integer.parseInt(priority)));
 			clear();
 		}
 	}
