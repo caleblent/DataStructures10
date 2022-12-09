@@ -13,19 +13,19 @@ public class MessagePanel extends VBox implements EventHandler{
 	/**
 	 * current messege TextField attribute
 	 */
-	private TextField cur;
+	private TextField currMessageTF;
 	/**
 	 * Button to delete current message attribute
 	 */
-	private Button delCur;
+	private Button delCurrMessButton;
 	/**
 	 * message to add to the rotater attribute
 	 */
-	private TextField futureMes;
+	private TextField newMessageTF;
 	/**
 	 * Button to add a message to the rotater attribute
 	 */
-	private Button addMes;
+	private Button addMessage;
 	
 	MessageRotaterController mrc = new MessageRotaterController();
 	
@@ -34,43 +34,43 @@ public class MessagePanel extends VBox implements EventHandler{
 		HBox temp = new HBox();
 		temp.setSpacing(6);
 		
-		Label curMes = new Label("Current I.P.:");
-		cur = new TextField();
-		cur.setEditable(false);
-		delCur = new Button("DDos this I.P.");
-		delCur.setOnAction(this);
-		temp.getChildren().addAll(curMes, cur, delCur);
+		Label currMessage = new Label("Current I.P.:");
+		currMessageTF = new TextField();
+		currMessageTF.setEditable(false);
+		delCurrMessButton = new Button("DDos this I.P.");
+		delCurrMessButton.setOnAction(this);
+		temp.getChildren().addAll(currMessage, currMessageTF, delCurrMessButton);
 		getChildren().add(temp);
 		
 		temp = new HBox();
 		temp.setSpacing(6);
-		Label newMes = new Label("Add new I.P. to hitlist:");
-		futureMes = new TextField();
-		addMes = new Button("Add I.P.");
-		addMes.setOnAction(this);
-		temp.getChildren().addAll(newMes, futureMes, addMes);
+		Label newMessage = new Label("Add new I.P. to hitlist:");
+		newMessageTF = new TextField();
+		addMessage = new Button("Add I.P.");
+		addMessage.setOnAction(this);
+		temp.getChildren().addAll(newMessage, newMessageTF, addMessage);
 		getChildren().add(temp);
 	}
 	/**
 	 * clears necessary TextFields
 	 */
 	private void clear() {
-		futureMes.setText("");
+		newMessageTF.setText("");
 	}
 	/**
 	 * Changes the currently displayed message
 	 * @param mes
 	 */
 	private void changeCur(String mes) {
-		cur.setText(mes);
+		currMessageTF.setText(mes);
 	}
 
 	@Override
 	public void handle(Event e) {
-		if (e.getSource() == delCur) {
+		if (e.getSource() == delCurrMessButton) {
 			changeCur(mrc.deleteCur());
-		}if (e.getSource() == addMes) {
-			Object f = futureMes.getUserData();
+		} if (e.getSource() == addMessage) {
+			Object f = newMessageTF.getUserData();
 			changeCur(mrc.addMes((String) f));
 			clear();
 		}

@@ -87,7 +87,7 @@ public class Driver extends Application implements EventHandler {
 			TabPane addPane = new TabPane();
 			root.setTop(addPane);
 			
-			PriorityQueuePanel priPan = new PriorityQueuePanel();
+			PriorityQueuePanel priPan = new PriorityQueuePanel(pq);
 			addPane.getTabs().add(new Tab("Hacking Tasks", priPan));
 			
 			MessagePanel mesPan = new MessagePanel();
