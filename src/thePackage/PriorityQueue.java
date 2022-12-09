@@ -54,6 +54,8 @@ public class PriorityQueue {
 	}
 	
 	public String getTopTaskDescription() {
+		if (heapArray.size() == 0)
+			return "*No hacking tasks currently available*";
 		return heapArray.get(0).description;
 	}
 	public int getTopTaskPriority() {
@@ -68,7 +70,9 @@ public class PriorityQueue {
 	}
 	
 	public void deleteTopTask() {
-		if (heapArray.size() == 1) {
+		if (heapArray.size() == 0) {
+			return;
+		} else if (heapArray.size() == 1) {
 			heapArray.remove(0);
 		} else {
 			heapArray.remove(0);

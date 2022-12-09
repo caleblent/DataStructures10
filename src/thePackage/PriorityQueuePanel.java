@@ -48,7 +48,7 @@ public class PriorityQueuePanel extends VBox implements EventHandler{
 		getChildren().add(displayedMessage);
 		
 		BorderPane d = new BorderPane();
-		deleteButton = new Button("Delete");
+		deleteButton = new Button("Complete Task");
 		deleteButton.setOnAction(this);
 		d.setRight(deleteButton);
 		getChildren().add(d);
