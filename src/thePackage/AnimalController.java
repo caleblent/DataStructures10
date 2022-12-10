@@ -21,33 +21,52 @@ public class AnimalController {
 	}
 	
 	public void startGame() {
+		aPanel.clearStuff();
+		aPanel.setPrompt3("Think of an animal. Let's see if I can guess it!");
+//		aPanel.setCurrentNode(rootNode);
+		aPanel.currentAnimalNode = rootNode;
+		aPanel.setPrompt1(rootNode.getData() + " (Y/N)");
+	}
+	
+	public void restartGame() {
 		aPanel.clearUserResponses();
 		aPanel.setPrompt3("Think of an animal. Let's see if I can guess it!");
-		aPanel.setCurrentNode(rootNode);
+		aPanel.currentAnimalNode = rootNode;
+		aPanel.setPrompt1(aPanel.currentAnimalNode.getData() + " (Y/N)");
 	}
 	
 	public void handleNextPrompt(AnimalNode node, UserInputType userInputType, String[] inputs) {
 		if (userInputType == UserInputType.YES) {
 			
 			node = node.getLeft();
-			aPanel.setPrompt1(node.getData() + " (Y/N)");
-			aPanel.clearPrompts2and3();
-			
+			if (node.isQuestion()) {
+				aPanel.setPrompt1(node.getData() + " (Y/N)"); // if it's a question
+			} else {
+				aPanel.setPrompt1("Is it a " + node.getData() + "? (Y/N)"); // if it's a guess
+			}
+			aPanel.currentAnimalNode = node;
+			aPanel.clearStuff();
 			
 		} else if (userInputType == UserInputType.NO) {
 			
 			node = node.getRight();
-			aPanel.setPrompt1(node.getData() + " (Y/N)");
-			aPanel.clearPrompts2and3();
+			if (node.isQuestion()) {
+				aPanel.setPrompt1(node.getData() + " (Y/N)"); // if it's a question
+			} else {
+				aPanel.setPrompt1("Is it a " + node.getData() + "? (Y/N)"); // if it's a guess
+			}
+			aPanel.currentAnimalNode = node;
+			aPanel.clearStuff();
 			
 		} else if (userInputType == UserInputType.YESFINAL) {
 			
 			aPanel.setPrompt2("Hurray! I got it. Let's play again...");
-			startGame();
+			restartGame();
 			
 		} else if (userInputType == UserInputType.NOFINAL) {
 			
 			aPanel.setPrompt2("Darn! What animal was it?");
+			coin = flipCoin();
 			if (coin) {
 				aPanel.setPrompt3("What is a YES for that but a NO for " + node.getData() + "?");
 			} else {
@@ -61,9 +80,8 @@ public class AnimalController {
 			} else {
 				node.insertLeft(inputs[0], inputs[1]);
 			}
-			coin = !coin;
 			aPanel.setPrompt2("Let's try again!");
-			startGame();
+			restartGame();
 		}
 	}
 

@@ -10,28 +10,27 @@ import thePackage.AnimalController.UserInputType;
 
 public class AnimalPanel extends VBox implements EventHandler {
 	
-//	AnimalGame aGame;
-	AnimalController aController;
-	AnimalNode currentAnimalNode;
-	AnimalNode rootNode;
+	public AnimalController aController;
+	public AnimalNode currentAnimalNode;
 	
 	private TextField prompt1TF;
-	public Button yesButton;
-	public Button noButton;
+	private Button yesButton;
+	private Button noButton;
 	private TextField prompt2TF;
-	public TextField userAnimalTF;
+	private TextField userAnimalTF;
 	private TextField prompt3TF;
-	public TextField userQuestionTF;
-	public Button submitButton;
+	private TextField userQuestionTF;
+	private Button submitButton;
 	
 	public AnimalPanel() {
-//		aGame = new AnimalGame();
 		AnimalNode mouse = new AnimalNode(null, "mouse", null);
 		AnimalNode skunk = new AnimalNode(null, "skunk", null);
-		AnimalNode first = new AnimalNode(mouse, "Does this animal love cheese?", skunk);
-		currentAnimalNode = first;
+		AnimalNode horse = new AnimalNode(null, "horse", null);
+		AnimalNode second = new AnimalNode(horse, "Does it gallop?", skunk);
+		AnimalNode first = new AnimalNode(mouse, "Does this animal love cheese?", second);
+		this.currentAnimalNode = first;
 		
-		aController = new AnimalController(this, rootNode);
+		aController = new AnimalController(this, currentAnimalNode);
 		
 		this.setSpacing(10);
 		prompt1TF = new TextField("Prompt 1 TextField");
@@ -66,10 +65,16 @@ public class AnimalPanel extends VBox implements EventHandler {
 		submitButton = new Button("Submit");
 		submitButton.setOnAction(this);
 		getChildren().add(submitButton);
+		
+		aController.startGame();
+	}
+	public void clearStuff() {
+		clearUserResponses();
+		clearPrompts2and3();
 	}
 	public void clearUserResponses() {
 		userAnimalTF.clear();
-		userQuestionTF.setText("");
+		userQuestionTF.clear();
 	}
 	public void setPrompt1(String mes) {
 		prompt1TF.setText(mes);
@@ -92,17 +97,26 @@ public class AnimalPanel extends VBox implements EventHandler {
 	public void handle(Event e) {
 		if (e.getSource() == yesButton) {
 			if (currentAnimalNode.isQuestion()) {
+				System.out.println("The node " + currentAnimalNode.toString() + " with data " + currentAnimalNode.getData() + " is a question.");
+				System.out.println("YES : ");
 				aController.handleNextPrompt(currentAnimalNode, UserInputType.YES, null);
 			} else {
-				aController.handleNextPrompt(rootNode, UserInputType.YESFINAL, null);
+				System.out.println("The node " + currentAnimalNode.toString() + " with data " + currentAnimalNode.getData() + " is an animal.");
+				System.out.println("YESFINAL : ");
+				aController.handleNextPrompt(currentAnimalNode, UserInputType.YESFINAL, null);
 			}
 		} else if (e.getSource() == noButton) {
 			if (currentAnimalNode.isQuestion()) {
+				System.out.println("The node " + currentAnimalNode.toString() + " with data " + currentAnimalNode.getData() + " is a question.");
+				System.out.println("NO : ");
 				aController.handleNextPrompt(currentAnimalNode, UserInputType.NO, null);
 			} else {
+				System.out.println("The node " + currentAnimalNode.toString() + " with data " + currentAnimalNode.getData() + " is an animal.");
+				System.out.println("NOFINAL : ");
 				aController.handleNextPrompt(currentAnimalNode, UserInputType.NOFINAL, null);
 			}
 		} else if (e.getSource() == submitButton) {
+			System.out.println("-SUBMIT-");
 			String animal = userAnimalTF.getText();
 			String question = userAnimalTF.getText();
 			if (animal == null || animal.isBlank() || animal.isEmpty() || 

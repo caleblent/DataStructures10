@@ -67,24 +67,24 @@ public class AnimalNode
 		this.right = right;
 	}
 	
-	@Override
-	public String toString() {
-		String str = "";
-		
-		if (this.left == null) {
-			str += "NULL";
-		} else {
-			str += this.left.getData();
-		}
-		str += " <-- " + this.data + " --> ";
-		if (this.right == null) {
-			str += "NULL";
-		} else {
-			str += this.right.getData();
-		}
-		
-		return str;
-	}
+//	@Override
+//	public String toString() {
+//		String str = "";
+//		
+//		if (this.left == null) {
+//			str += "NULL";
+//		} else {
+//			str += this.left.getData();
+//		}
+//		str += " <-- " + this.data + " --> ";
+//		if (this.right == null) {
+//			str += "NULL";
+//		} else {
+//			str += this.right.getData();
+//		}
+//		
+//		return str;
+//	}
 	
 //	@Override
 //	public String toString() {

@@ -59,7 +59,7 @@ public class Driver extends Application implements EventHandler {
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 625, 500);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Hacking Animals");
+			primaryStage.setTitle("Hacking.Animals");
 			primaryStage.setMinHeight(500);
 			primaryStage.setMinWidth(625);
 			
