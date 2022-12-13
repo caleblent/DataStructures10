@@ -2,6 +2,11 @@ package thePackage;
 
 import java.util.Scanner;
 
+/**
+ * Modification of the original MachineLearning file
+ * 
+ * @author Caleb Lent
+ */
 public class AnimalGame {
 	
 	static Scanner console = new Scanner(System.in);

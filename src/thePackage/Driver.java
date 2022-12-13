@@ -20,6 +20,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import thePackage.PriorityQueue.Task;
 
+/**
+ * Main class, used to drive the application
+ * 
+ * @author Caleb Lent
+ * @author Graham Johnson
+ */
 public class Driver extends Application implements EventHandler {
 	private Button exitButton;
 	private PriorityQueue pq;
@@ -52,8 +58,7 @@ public class Driver extends Application implements EventHandler {
 			PQReader.close();
 			
 			// add AnimalGame data
-			
-			
+			// TODO
 			
 			// open up the GUI window
 			BorderPane root = new BorderPane();
@@ -80,6 +85,7 @@ public class Driver extends Application implements EventHandler {
 			root.setPadding(new Insets(5, 5, 5, 5));
 			root.setBottom(exitButton);
 			
+			// display the GUI window
 			primaryStage.show();
 		} catch (IOException eRead){
 			eRead.printStackTrace();
@@ -114,8 +120,10 @@ public class Driver extends Application implements EventHandler {
 			} catch (IOException eWrite) {
 				eWrite.printStackTrace();
 			}
-			
+			// exit the platform
 			Platform.exit();
+			
+			// halt the JVM execution
 			System.exit(0);
 		}
 	}

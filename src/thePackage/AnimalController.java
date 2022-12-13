@@ -1,18 +1,39 @@
 package thePackage;
 
+/**
+ * This class guides the computer through the animal game.
+ * 
+ * MachineLearning was the console implementation of the game.
+ * AnimalController is the (attempt of a) GUI implementation of the game.
+ * 
+ * @author Caleb Lent
+ */
 public class AnimalController {
 	
 	private AnimalPanel aPanel;
 	private AnimalNode rootNode;
-	private boolean coin;
+	private boolean coin; // used for determining the order of the question asked (when inserting a new node)
 	
+	/**
+	 * Constructor takes the AnimalPanel and the starting AnimalNode as parameters,
+	 * allowing the AnimalController to make direct references to their attributes
+	 * 
+	 * @param animalPanel
+	 * @param rootNode
+	 */
 	public AnimalController(AnimalPanel animalPanel, AnimalNode rootNode) {
 		this.aPanel = animalPanel;
 		this.rootNode = rootNode;
 		this.coin = true;
 	}
 	
-	public enum UserInputType{
+	/**
+	 * Custom enum object that tells the handleNextPrompt() method what type
+	 * of input is is receiving
+	 * 
+	 * @author Caleb Lent
+	 */
+	public enum UserInputType {
 		YES,
 		NO,
 		YESFINAL,
@@ -20,14 +41,17 @@ public class AnimalController {
 		SUBMIT
 	}
 	
+	/**
+	 * Called once at the start of the game
+	 */
 	public void startGame() {
-		aPanel.clearStuff();
-		aPanel.setPrompt3("Think of an animal. Let's see if I can guess it!");
-//		aPanel.setCurrentNode(rootNode);
-		aPanel.currentAnimalNode = rootNode;
-		aPanel.setPrompt1(rootNode.getData() + " (Y/N)");
+		aPanel.clearPrompts2and3();
+		restartGame();
 	}
 	
+	/**
+	 * Called every time the game "restarts"
+	 */
 	public void restartGame() {
 		aPanel.clearUserResponses();
 		aPanel.setPrompt3("Think of an animal. Let's see if I can guess it!");
@@ -35,6 +59,13 @@ public class AnimalController {
 		aPanel.setPrompt1(aPanel.currentAnimalNode.getData() + " (Y/N)");
 	}
 	
+	/**
+	 * Receives the UserInputType to know how to handle the inputs, then does so
+	 * 
+	 * @param node
+	 * @param userInputType
+	 * @param inputs
+	 */
 	public void handleNextPrompt(AnimalNode node, UserInputType userInputType, String[] inputs) {
 		if (userInputType == UserInputType.YES) {
 			

@@ -8,8 +8,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import thePackage.AnimalController.UserInputType;
 
+/**
+ * GUI Class
+ * 
+ * accepts input from the user and sends to the AnimalController to handle it
+ * 
+ * @author Caleb Lent
+ * @author Graham Johnson
+ */
 public class AnimalPanel extends VBox implements EventHandler {
 	
+	// these attributes are public to allow AnimalController ease of access
 	public AnimalController aController;
 	public AnimalNode currentAnimalNode;
 	
@@ -23,6 +32,7 @@ public class AnimalPanel extends VBox implements EventHandler {
 	private Button submitButton;
 	
 	public AnimalPanel() {
+		// starting Animal Game data
 		AnimalNode mouse = new AnimalNode(null, "mouse", null);
 		AnimalNode skunk = new AnimalNode(null, "skunk", null);
 		AnimalNode horse = new AnimalNode(null, "horse", null);
@@ -30,8 +40,10 @@ public class AnimalPanel extends VBox implements EventHandler {
 		AnimalNode first = new AnimalNode(mouse, "Does this animal love cheese?", second);
 		this.currentAnimalNode = first;
 		
+		// initialize AnimalController, which handles user input
 		aController = new AnimalController(this, currentAnimalNode);
 		
+		// AnimalPanel GUI
 		this.setSpacing(10);
 		prompt1TF = new TextField("Prompt 1 TextField");
 		prompt1TF.setEditable(false);
@@ -66,8 +78,11 @@ public class AnimalPanel extends VBox implements EventHandler {
 		submitButton.setOnAction(this);
 		getChildren().add(submitButton);
 		
+		// calls the startGame() method at initialization
 		aController.startGame();
 	}
+	
+	////////////// CLEAR METHODS ///////////////
 	public void clearStuff() {
 		clearUserResponses();
 		clearPrompts2and3();
@@ -76,6 +91,12 @@ public class AnimalPanel extends VBox implements EventHandler {
 		userAnimalTF.clear();
 		userQuestionTF.clear();
 	}
+	public void clearPrompts2and3() {
+		prompt2TF.clear();
+		prompt3TF.clear();
+	}
+	
+	////////////// SETTERS ///////////////
 	public void setPrompt1(String mes) {
 		prompt1TF.setText(mes);
 	}
@@ -85,38 +106,35 @@ public class AnimalPanel extends VBox implements EventHandler {
 	public void setPrompt3(String mes) {
 		prompt3TF.setText(mes);
 	}
-	public void clearPrompts2and3() {
-		prompt2TF.clear();
-		prompt3TF.clear();
-	}
-	public void setCurrentNode(AnimalNode curr) {
-		this.currentAnimalNode = curr;
-	}
 	
+	/**
+	 * Tells the AnimalController what type of input its handleNextPrompt() method will
+	 * be receiving, then packages such data and ships it off
+	 */
 	@Override
 	public void handle(Event e) {
 		if (e.getSource() == yesButton) {
 			if (currentAnimalNode.isQuestion()) {
-				System.out.println("The node " + currentAnimalNode.toString() + " with data " + currentAnimalNode.getData() + " is a question.");
-				System.out.println("YES : ");
+//				System.out.println("The node " + currentAnimalNode.toString() + " with data " + currentAnimalNode.getData() + " is a question.");
+//				System.out.println("YES : ");
 				aController.handleNextPrompt(currentAnimalNode, UserInputType.YES, null);
 			} else {
-				System.out.println("The node " + currentAnimalNode.toString() + " with data " + currentAnimalNode.getData() + " is an animal.");
-				System.out.println("YESFINAL : ");
+//				System.out.println("The node " + currentAnimalNode.toString() + " with data " + currentAnimalNode.getData() + " is an animal.");
+//				System.out.println("YESFINAL : ");
 				aController.handleNextPrompt(currentAnimalNode, UserInputType.YESFINAL, null);
 			}
 		} else if (e.getSource() == noButton) {
 			if (currentAnimalNode.isQuestion()) {
-				System.out.println("The node " + currentAnimalNode.toString() + " with data " + currentAnimalNode.getData() + " is a question.");
-				System.out.println("NO : ");
+//				System.out.println("The node " + currentAnimalNode.toString() + " with data " + currentAnimalNode.getData() + " is a question.");
+//				System.out.println("NO : ");
 				aController.handleNextPrompt(currentAnimalNode, UserInputType.NO, null);
 			} else {
-				System.out.println("The node " + currentAnimalNode.toString() + " with data " + currentAnimalNode.getData() + " is an animal.");
-				System.out.println("NOFINAL : ");
+//				System.out.println("The node " + currentAnimalNode.toString() + " with data " + currentAnimalNode.getData() + " is an animal.");
+//				System.out.println("NOFINAL : ");
 				aController.handleNextPrompt(currentAnimalNode, UserInputType.NOFINAL, null);
 			}
 		} else if (e.getSource() == submitButton) {
-			System.out.println("-SUBMIT-");
+//			System.out.println("-SUBMIT-");
 			String animal = userAnimalTF.getText();
 			String question = userAnimalTF.getText();
 			if (animal == null || animal.isBlank() || animal.isEmpty() || 

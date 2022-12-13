@@ -1,5 +1,30 @@
 package thePackage;
 
+/**
+ * The data structure that the Animal Guessing Game uses to hold data.
+ * 
+ * If the last char in the (String) data field is a question mark, the data
+ * is interpreted as a 'question'. If not, it is considered an 'animal'. 
+ * 
+ * The game works as such, iterating through a tree of AnimalNodes containing
+ * questions until it reaches a leaf node, which has an animal guess.
+ * 
+ * The user is asked if this leaf node is the animal they were thinking of.
+ * If it is, the game restarts by going to the root node. If it is NOT,
+ * the game prompts the user for the animal they were thinking of and a 
+ * question which can be used to differentiate the two.
+ * 
+ * This data is added to AnimalNodes, inserted into the tree into appropriate
+ * places, and the game restarts.
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Can be used in conjunction with MachineLearning, which is the console 
+ * implementation of the game
+ * 
+ * Can be used in conjunction with AnimalController, which is the GUI 
+ * implementation of the game
+ * 
+ * @author Caleb Lent
+ */
 public class AnimalNode
 {
 	// attributes of an AnimalNode:
@@ -68,23 +93,23 @@ public class AnimalNode
 	}
 	
 //	@Override
-//	public String toString() {
-//		String str = "";
-//		
-//		if (this.left == null) {
-//			str += "NULL";
-//		} else {
-//			str += this.left.getData();
-//		}
-//		str += " <-- " + this.data + " --> ";
-//		if (this.right == null) {
-//			str += "NULL";
-//		} else {
-//			str += this.right.getData();
-//		}
-//		
-//		return str;
-//	}
+	public String toString() {
+		String str = "";
+		
+		if (this.left == null) {
+			str += "NULL";
+		} else {
+			str += this.left.getData();
+		}
+		str += " <-- " + this.data + " --> ";
+		if (this.right == null) {
+			str += "NULL";
+		} else {
+			str += this.right.getData();
+		}
+		
+		return str;
+	}
 	
 //	@Override
 //	public String toString() {
