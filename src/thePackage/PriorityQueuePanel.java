@@ -39,6 +39,10 @@ public class PriorityQueuePanel extends VBox implements EventHandler{
 	 */
 	private Button addTaskButton;
 	
+	/**
+	 * Constructor method, accepts 
+	 * @param priorityQueue
+	 */
 	public PriorityQueuePanel(PriorityQueue priorityQueue) {
 		this.pq = priorityQueue;
 		

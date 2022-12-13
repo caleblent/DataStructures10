@@ -12,19 +12,13 @@ public class PriorityQueue {
 	// Requirements: Each step needs to be filled except last step
 	// Parent needs to be greater/less than the children
 	private ArrayList<Task> heapArray;
+	// we don't need an "int size" attribute because ArrayList has this
 	
-//	private int size;
-
 	// constructor
 	public PriorityQueue() {
 		heapArray = new ArrayList<>();
-//		size = 0;
 	}
 	
-//	public int getSize() {
-//		return this.size;
-//	}
-
 	/**
 	 * Take a Task object and adds it to the heapArray
 	 * 
@@ -119,10 +113,6 @@ public class PriorityQueue {
 
 	}
 
-//	private boolean shouldSwap(T child, T parent) {
-//		return max && child.compareTo(parent) >= 1 || !max && child.compareTo(parent) <= -1;
-//	}
-	
 	private boolean shouldSwap(Task child, Task parent) {
 		return child.priority - parent.priority < 0;
 	}

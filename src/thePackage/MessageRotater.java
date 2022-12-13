@@ -1,13 +1,19 @@
 package thePackage;
 
+/**
+ * Custom Data structure that takes 
+ * 
+ * @author Caleb Lent
+ */
 public class MessageRotater {
 
-	protected Node head; // the first node of the list
-	protected Node tail; // the last node of the list
-	protected Node location; // true if element found, else false
-	protected int numElements; // Number of elements in this list
-	protected boolean found; // true if element found, else false
+	private Node head; // the first node of the list
+	private Node tail; // the last node of the list
+	private Node location; // true if element found, else false
+	private int numElements; // Number of elements in this list
+	private boolean found; // true if element found, else false
 
+	// Constructor
 	public MessageRotater()
 	// default constructor
 	{
